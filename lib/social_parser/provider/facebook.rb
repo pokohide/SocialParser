@@ -4,7 +4,7 @@ module SocialParser
   module Provider
     class Facebook < Base
       URL_FORMATS = {
-        full: /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/[\w\-]*)?(?:[?\d\-]*\/)?(?:profile.php\?id=(?=\d.*))?(?<id>[\w\-\.]*)?/i,
+        full: /((http|https):\/\/)?(www\.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/[\w\-]*)?(?:[?\d\-]*\/)?(?:profile.php\?id=(?=\d.*))?(?<id>[\w\-\.]*)?/i,
         regular: /\Ahttps?:\/\/www\.facebook\.com\/(?!sharer\/)(?!share\.php\?)(?!sharer\.php\?)(?<id>.+?)\/?\Z/,
         shorter: /\Ahttps?:\/\/facebook\.com\/(?!sharer\/)(?!share\.php\?)(?!sharer\.php\?)(?<id>.+?)\/?\Z/
       }

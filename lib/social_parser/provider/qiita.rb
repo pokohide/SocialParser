@@ -2,18 +2,17 @@ require 'social_parser/provider/base'
 
 module SocialParser
   module Provider
-    class Github < Base
+    class Qiita < Base
       URL_FORMATS = {
-        full: /((http|https)?:\/\/)?(www\.)?github\.com\/(?<id>[\w\-\.]+)?/i,
-        regular: /\Ahttps?:\/\/github\.com\/(?<id>.+?)\/?\Z/
+        regular: /\A((https?)?:\/\/)?(www\.)?qiita\.com\/(?<id>[\w\-\.]+)/i
       }
 
       def provider
-        :github
+        :qiita
       end
 
       def url
-        "https://github.com/#{username}"
+        "https://qiita.com/#{username}"
       end
 
       private

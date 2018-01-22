@@ -4,16 +4,16 @@ module SocialParser
   module Provider
     class Linkedin < Base
       URL_FORMATS = {
-        regular: /\Ahttps?:\/\/www\.linkedin\.com\/(?<linkedin>.+?)\/?\Z/
+        full: /\A((http|https):\/\/)?(www\.)?linkedin\.com\/(?<type>(in|company|school))?\/(?<id>[\w\-\.]+)\/?/i,
+        regular: /\Ahttps?:\/\/www\.linkedin\.com\/(?<id>.+?)\/?\Z/
       }
-      # /(?:(?:http|https):\/\/)?(?:www.|[a-z]{2}.)?linkedin.com\/in\/([\w]*)/i
 
       def provider
         :linkedin
       end
 
       def url
-        "https://www.linkedin.com/in/#{username}"
+        "https://www.linkedin.com/#{@type || 'in'}/#{username}"
       end
 
       private
@@ -21,7 +21,10 @@ module SocialParser
       def parse_from_url
         URL_FORMATS.values.each do |format|
           m = format.match(url_from_attributes)
-          return m[:linkedin].sub(/\?.*/m, '') if m
+          if m
+            @type = m[:type] || 'in'
+            return m[:id].sub(/\?.*/m, '')
+          end
         end
         nil
       end

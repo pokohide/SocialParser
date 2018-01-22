@@ -2,18 +2,17 @@ require 'social_parser/provider/base'
 
 module SocialParser
   module Provider
-    class Github < Base
+    class Medium < Base
       URL_FORMATS = {
-        full: /((http|https)?:\/\/)?(www\.)?github\.com\/(?<id>[\w\-\.]+)?/i,
-        regular: /\Ahttps?:\/\/github\.com\/(?<id>.+?)\/?\Z/
+        full: /\A((http|https)?:\/\/)?(www\.)?medium\.com\/(?<id>@[\w\-\.]+)\/?/i
       }
 
       def provider
-        :github
+        :medium
       end
 
       def url
-        "https://github.com/#{username}"
+        "https://medium.com/#{username}"
       end
 
       private

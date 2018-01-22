@@ -46,9 +46,7 @@ module SocialParser
       end
 
       def self.providers
-        @providers ||= [:facebook, :github, :twitter, :youtube, :instagram, :linkedin]
-        # @providers ||= Dir.entries(__dir__)
-        #   .reject { |f| File.directory? f }.map{ |s| s.gsub('.rb', '') } - ['base']
+        @providers ||= [:facebook, :github, :twitter, :youtube, :instagram, :linkedin, :medium]
       end
     end
   end
