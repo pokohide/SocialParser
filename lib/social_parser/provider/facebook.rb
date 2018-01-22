@@ -5,8 +5,9 @@ module SocialParser
     class Facebook < Base
       # URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/[\w\-]*)?(?:[?\d\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-\.]*)?/i
       URL_FORMATS = {
-        regular: /\Ahttps?:\/\/www\.facebook\.com\/(?!sharer\/)(?!share\.php\?)(?!sharer\.php\?)(?<facebook>.+?)\/?\Z/,
-        shorter: /\Ahttps?:\/\/facebook\.com\/(?!sharer\/)(?!share\.php\?)(?!sharer\.php\?)(?<facebook>.+?)\/?\Z/
+        full: /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/[\w\-]*)?(?:[?\d\-]*\/)?(?:profile.php\?id=(?=\d.*))?(?<id>[\w\-\.]*)?/i,
+        regular: /\Ahttps?:\/\/www\.facebook\.com\/(?!sharer\/)(?!share\.php\?)(?!sharer\.php\?)(?<id>.+?)\/?\Z/,
+        shorter: /\Ahttps?:\/\/facebook\.com\/(?!sharer\/)(?!share\.php\?)(?!sharer\.php\?)(?<id>.+?)\/?\Z/
       }
 
       def provider
@@ -18,7 +19,7 @@ module SocialParser
       def parse_from_url
         URL_FORMATS.values.each do |format|
           m = format.match(url_from_attributes)
-          return m[:facebook].sub(/\?.*/m, '') if m
+          return m[:id].sub(/\?.*/m, '') if m
         end
         nil
       end

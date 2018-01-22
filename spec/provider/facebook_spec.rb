@@ -82,8 +82,5 @@ RSpec.describe SocialParser do
       parser = described_class.parse 'https://www.facebook.com/pokohide/videos?lst=xxxx&ref=yyy'
       expect(parser.username).to eq 'pokohide'
     end
-
-    it 'parse'
-
   end
 end
