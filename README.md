@@ -12,6 +12,21 @@ Add this line to your application's Gemfile:
 gem 'social_parser'
 ```
 
+```
+parser = SocialParser.parse 'https://www.twitter.com/hyde141421356'
+=> #<SocialParser::Link:0x007fb13f8765e8 @url="https://www.twitter.com/hyde141421356">
+
+parser.username
+=> 'hyde141421356'
+
+parser.provider
+=> :twitter
+
+parser.url
+=> 'https://www.twitter.com/hyde141421356'
+
+```
+
 And then execute:
 
     $ bundle
