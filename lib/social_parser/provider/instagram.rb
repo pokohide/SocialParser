@@ -4,7 +4,7 @@ module SocialParser
   module Provider
     class Instagram < Base
       URL_FORMATS = {
-        regular: /\Ahttps?:\/\/www\.instagram\.com\/(?<instagram>.+?)\/?\Z/
+        regular: /\A((https?)?:\/\/)?(www\.)?instagram\.com\/(stories\/)?(?<instagram>.+?)\/?\Z/
       }
 
       def provider
