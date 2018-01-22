@@ -5,9 +5,15 @@ module SocialParser
     class Base < ::SocialParser::Link
 
       def self.parse(attrs)
-        providers.map do |provider|
-          SocialParser::Provider.const_get(provider.to_s.capitalize).new(attrs)
-        end.find(&:valid?) or ::SocialParser::Link.new(attrs)
+        if attrs[:provider]
+
+          SocialParser::Provider.const_get(attrs[:provider].to_s.capitalize).new(attrs)
+        else
+
+          providers.map do |provider|
+            SocialParser::Provider.const_get(provider.to_s.capitalize).new(attrs)
+          end.find(&:valid?) or ::SocialParser::Link.new(attrs)
+        end
       end
 
       def username

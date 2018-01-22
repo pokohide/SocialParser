@@ -3,7 +3,6 @@ require 'social_parser/provider/base'
 module SocialParser
   module Provider
     class Facebook < Base
-      # URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/[\w\-]*)?(?:[?\d\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-\.]*)?/i
       URL_FORMATS = {
         full: /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/[\w\-]*)?(?:[?\d\-]*\/)?(?:profile.php\?id=(?=\d.*))?(?<id>[\w\-\.]*)?/i,
         regular: /\Ahttps?:\/\/www\.facebook\.com\/(?!sharer\/)(?!share\.php\?)(?!sharer\.php\?)(?<id>.+?)\/?\Z/,
