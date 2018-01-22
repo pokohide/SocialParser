@@ -31,7 +31,7 @@ DEPENDENCIES
   bundler (~> 1.16)
   public_suffix
   rake (~> 10.0)
-  rspec (~> 3.0)
+  rspec
   social_parser!
 
 BUNDLED WITH
