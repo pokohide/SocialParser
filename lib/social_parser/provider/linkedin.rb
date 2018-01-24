@@ -4,7 +4,7 @@ module SocialParser
   module Provider
     class Linkedin < Base
       URL_FORMATS = {
-        full: /\A((https?):\/\/)?(www\.)?linkedin\.com\/(?<type>(in|company|school))?\/(?<id>[\w\-\.]+)\/?/i
+        full: /\A((https?):\/\/)?(www\.)?linkedin\.com\/(?<type>(in|company|school))?\/(?<id>[\w\-\.ぁ-んァ-ヴ一-龠]+)\/?/iu
       }
 
       def provider
@@ -24,10 +24,9 @@ module SocialParser
       def parse_from_url
         URL_FORMATS.values.each do |format|
           m = format.match(url_from_attributes)
-          if m
-            @type = m.names.include?('type') ? m[:type] : nil
-            return m[:id]
-          end
+          next unless m
+          @type = m[:type] if m.names.include?('type')
+          return m[:id]
         end
         nil
       end
