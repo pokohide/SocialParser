@@ -2,22 +2,22 @@ require 'social_parser/provider/base'
 
 module SocialParser
   module Provider
-    class Linkedin < Base
+    class Pinterest < Base
       URL_FORMATS = {
-        full: /\A((http|https):\/\/)?(www\.)?linkedin\.com\/(?<type>(in|company|school))?\/(?<id>[\w\-\.]+)\/?/i,
-        regular: /\Ahttps?:\/\/www\.linkedin\.com\/(?<id>.+?)\/?\Z/
+        full: /\A((https?)?:\/\/)?(www\.)?pinterest\.(?<domain>(com|jp))\/(?<id>[\w\-\.]+)\/?/i
       }
 
       def provider
-        :linkedin
+        :pinterest
       end
 
-      def type
-        @type || 'in'
+      def domain
+        @domain || 'com'
       end
 
       def url
-        "https://www.linkedin.#{domain}/#{type}/#{username}"
+        @domain ||= 'com'
+        "https://www.pinterest.#{domain}/#{username}"
       end
 
       private
@@ -26,7 +26,7 @@ module SocialParser
         URL_FORMATS.values.each do |format|
           m = format.match(url_from_attributes)
           if m
-            @type = m[:type] || 'in'
+            @domain = m[:domain] || 'com'
             return m[:id].sub(/\?.*/m, '')
           end
         end

@@ -30,9 +30,13 @@ module SocialParser
         "https://www.#{provider.to_s}.com/#{username}"
       end
 
+      def domain
+        'com'
+      end
+
       def valid?
-        (@provider and @provider.downcase == provider) or
-        (username and URI.parse(url_from_attributes).host.match("#{provider.to_s}.com"))
+        (@provider and @provider == provider) or
+        (username and URI.parse(url_from_attributes).host.match("#{provider.to_s}.#{domain}"))
       rescue URI::BadURIError, URI::InvalidURIError
         false
       end
@@ -46,7 +50,8 @@ module SocialParser
       end
 
       def self.providers
-        @providers ||= [:facebook, :github, :twitter, :youtube, :instagram, :linkedin, :medium, :qiita]
+        @providers ||= [:facebook, :github, :twitter, :youtube, :instagram, :linkedin,
+                        :medium, :qiita, :pinterest]
       end
     end
   end

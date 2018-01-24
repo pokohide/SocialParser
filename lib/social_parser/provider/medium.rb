@@ -12,7 +12,7 @@ module SocialParser
       end
 
       def url
-        "https://medium.com/#{username}"
+        "https://medium.#{domain}/#{username}"
       end
 
       private

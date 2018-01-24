@@ -12,7 +12,7 @@ module SocialParser
       end
 
       def url
-        "https://qiita.com/#{username}"
+        "https://qiita.#{domain}/#{username}"
       end
 
       private

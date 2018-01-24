@@ -13,7 +13,7 @@ module SocialParser
       end
 
       def url
-        "https://github.com/#{username}"
+        "https://github.#{domain}/#{username}"
       end
 
       private
