@@ -4,8 +4,8 @@ module SocialParser
   module Provider
     class Twitter < Base
       URL_FORMATS = {
-        full: /((http|https):\/\/)?(www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?<id>\w+)/i,
-        regular: /\Ahttps?:\/\/(www\.)?twitter\.com\/(?!share)(?!share\?)(?!intent\/)(?<id>.+?)\/?\Z/
+        full: /\A((https?):\/\/)?(www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?<id>\w+)/i
+        # regular: /\Ahttps?:\/\/(www\.)?twitter\.com\/(?!share)(?!share\?)(?!intent\/)(?<id>.+?)\/?\Z/
       }
 
       def provider
@@ -17,7 +17,7 @@ module SocialParser
       def parse_from_url
         URL_FORMATS.values.each do |format|
           m = format.match(url_from_attributes)
-          return m[:id].sub(/\?.*/m, '') if m
+          return m[:id] if m
         end
         nil
       end

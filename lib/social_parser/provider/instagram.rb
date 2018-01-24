@@ -16,7 +16,7 @@ module SocialParser
       def parse_from_url
         URL_FORMATS.values.each do |format|
           m = format.match(url_from_attributes)
-          return m[:instagram].sub(/\?.*/m, '') if m
+          return m[:instagram] if m
         end
         nil
       end

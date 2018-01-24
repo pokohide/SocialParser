@@ -26,8 +26,8 @@ module SocialParser
         URL_FORMATS.values.each do |format|
           m = format.match(url_from_attributes)
           if m
-            @domain = m[:domain] || 'com'
-            return m[:id].sub(/\?.*/m, '')
+            @domain = m[:domain]
+            return m[:id]
           end
         end
         nil
