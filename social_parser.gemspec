@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Parse social media attributes from url or construct url from attributes}
   spec.description   = %q{Parse social media attributes from url or construct url from attributes}
-  spec.homepage      = 'https://github.com/hyde2able'
+  spec.homepage      = 'https://github.com/hyde2able/SocialParser'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
