@@ -1,6 +1,9 @@
 require 'social_parser/link'
 
 module SocialParser
+
+  class InvalidURIError < Exception; end
+
   module Provider
     class Base < ::SocialParser::Link
 
@@ -32,6 +35,10 @@ module SocialParser
 
       def domain
         'com'
+      end
+
+      def embed_url
+        raise SocialParser::InvalidURIError
       end
 
       def valid?

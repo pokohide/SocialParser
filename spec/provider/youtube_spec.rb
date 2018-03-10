@@ -41,6 +41,33 @@ RSpec.describe SocialParser do
     end
   end
 
+  context 'youtube video url' do
+    let(:profile_attributes) { { url: 'https://www.youtube.com/watch?v=WOvdMz4yM9U' } }
+
+    it 'returns the parsed attributes' do
+      expect(parser.url).to eq 'https://www.youtube.com/watch?v=WOvdMz4yM9U'
+      expect(parser.provider).to eq :youtube
+      expect(parser.username).to eq 'WOvdMz4yM9U'
+      expect(parser.type).to eq 'video'
+    end
+  end
+
+  context 'convert video url into embed url' do
+    let(:profile_attributes) { { url: 'https://www.youtube.com/watch?v=WOvdMz4yM9U' } }
+
+    it 'returns the embed url' do
+      expect(parser.embed_url).to eq 'https://www.youtube.com/embed/WOvdMz4yM9U'
+    end
+  end
+
+  context 'convert user url into embed url cause an error' do
+    let(:profile_attributes) { { url: 'https://www.youtube.com/user/norunine' } }
+
+    it 'cause an errors' do
+      expect { parser.embed_url }.to raise_error(SocialParser::InvalidURIError)
+    end
+  end
+
   context 'url variations' do
     it 'parses username from url with trailing slash' do
       parser = described_class.parse 'https://www.youtube.com/user/norunine/'

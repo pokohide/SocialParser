@@ -4,6 +4,7 @@ module SocialParser
   module Provider
     class Youtube < Base
       URL_FORMATS = {
+        video: /\A((https?)?:\/\/)?(www\.)?youtube\.com\/watch\?v=(?<id>[\w\-\.]+)\/?/i,
         full: /\A((https?)?:\/\/)?(www\.)?youtube\.com\/(?<type>(user|channel|playlist))\/(?<id>[\w\-\.]+)\/?/i,
         shortend: /\A((https?)?:\/\/)?(www\.)?youtube\.com\/(?<id>[\w\-\.]+)\/?/i,
       }
@@ -17,10 +18,23 @@ module SocialParser
       end
 
       def url
-        "https://www.youtube.#{domain}/#{type}/#{username}"
+        if video?
+          "https://www.youtube.#{domain}/watch?v=#{username}"
+        else
+          "https://www.youtube.#{domain}/#{type}/#{username}"
+        end
+      end
+
+      def embed_url
+        return super unless video?
+        "https://www.youtube.#{domain}/embed/#{username}"
       end
 
       private
+
+      def video?
+        type == 'video'
+      end
 
       def parse_from_url
         URL_FORMATS.each do |key, format|
@@ -30,6 +44,8 @@ module SocialParser
           if key == :full
             @type = m[:type]
             return nil if @type != 'user'
+          elsif key == :video
+            @type = 'video'
           end
           return m[:id]
         end
