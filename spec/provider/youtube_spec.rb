@@ -47,7 +47,7 @@ RSpec.describe SocialParser do
     it 'returns the parsed attributes' do
       expect(parser.url).to eq 'https://www.youtube.com/watch?v=WOvdMz4yM9U'
       expect(parser.provider).to eq :youtube
-      expect(parser.username).to eq 'WOvdMz4yM9U'
+      expect(parser.id).to eq 'WOvdMz4yM9U'
       expect(parser.type).to eq 'video'
     end
   end
@@ -56,6 +56,7 @@ RSpec.describe SocialParser do
     let(:profile_attributes) { { url: 'https://www.youtube.com/watch?v=WOvdMz4yM9U' } }
 
     it 'returns the embed url' do
+      expect(parser.id).to eq 'WOvdMz4yM9U'
       expect(parser.embed_url).to eq 'https://www.youtube.com/embed/WOvdMz4yM9U'
     end
   end

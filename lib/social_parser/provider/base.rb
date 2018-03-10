@@ -48,6 +48,8 @@ module SocialParser
         false
       end
 
+      alias_method :id, :username
+
       private
 
       def parse_from_url
@@ -58,7 +60,7 @@ module SocialParser
 
       def self.providers
         @providers ||= [:facebook, :github, :twitter, :youtube, :instagram, :linkedin,
-                        :medium, :qiita, :pinterest, :google]
+                        :medium, :qiita, :pinterest, :google, :vimeo]
       end
     end
   end
