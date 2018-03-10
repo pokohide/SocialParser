@@ -1,6 +1,6 @@
 # SocialParser
 
-![SocialParser](https://raw.githubusercontent.com/hyde2able/social_parser/master/logo.png)
+![SocialParser](https://raw.githubusercontent.com/hyde2able/SocialParser/master/logo.png)
 
 Parse social media attributes from url or construct url from attributes.
 
