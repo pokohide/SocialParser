@@ -1,8 +1,7 @@
 # SocialParser
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/social_parser`. To experiment with that code, run `bin/console` for an interactive prompt.
+Parse social media attributes from url or construct url from attributes.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -12,9 +11,25 @@ Add this line to your application's Gemfile:
 gem 'social_parser'
 ```
 
+And then execute:
+
+```bash
+$ bundle install
 ```
+
+Or install it yourself as:
+
+```bash
+$ gem install social_parser
+```
+
+## Usage
+
+The following code is an example of Twitter.
+
+```ruby
 parser = SocialParser.parse 'https://www.twitter.com/hyde141421356'
-=> #<SocialParser::Link:0x007fb13f8765e8 @url="https://www.twitter.com/hyde141421356">
+=> #<SocialParser::Provider::Twitter:0x007fc57720a690 @url="https://www.twitter.com/hyde141421356">
 
 parser.username
 => 'hyde141421356'
@@ -24,35 +39,55 @@ parser.provider
 
 parser.url
 => 'https://www.twitter.com/hyde141421356'
-
 ```
 
-And then execute:
+Facebook, Google+, LinkedIn, etc... as well.
 
-    $ bundle
+```ruby
+parser = SocialParser.parse 'https://github.com/hyde2able'
+=> #<SocialParser::Provider::Github:0x007fc5771e3c98 @url="https://github.com/hyde2able">
 
-Or install it yourself as:
+parser.username
+=> 'hyde2able'
 
-    $ gem install social_parser
+parser.provider
+=> :github
 
-## Usage
+parser.url
+=> 'https://github.com/hyde2able'
+```
 
-TODO: Write usage instructions here
+An example of Youtube.
 
-## Development
+```ruby
+parser = SocialParser.parse 'https://www.youtube.com/watch?v=WOvdMz4yM9U'
+=> #<SocialParser::Provider::Youtube:0x007faa5e26fd58 @url="https://www.youtube.com/watch?v=WOvdMz4yM9U", @type="video">
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+parser.id # alias parser.username
+=> 'WOvdMz4yM9U'
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+parser.embed_url
+=> 'https://www.youtube.com/embed/WOvdMz4yM9U'
+```
 
-## Contributing
+When an embedded URL is not provided
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/social_parser. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+```ruby
+parser = SocialParser.parse 'https://github.com/hyde2able'
+=> #<SocialParser::Provider::Github:0x007faa5e06d7a8 @url="https://github.com/hyde2able">
+
+parser.embed_url
+# SocialParser::InvalidURIError: SocialParser::InvalidURIError
+```
+
+## Test
+
+Excute this code
+
+```
+bundle exec rspec
+```
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the SocialParser project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/social_parser/blob/master/CODE_OF_CONDUCT.md).
