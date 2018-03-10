@@ -51,7 +51,7 @@ module SocialParser
 
       def self.providers
         @providers ||= [:facebook, :github, :twitter, :youtube, :instagram, :linkedin,
-                        :medium, :qiita, :pinterest]
+                        :medium, :qiita, :pinterest, :google]
       end
     end
   end

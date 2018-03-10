@@ -4,43 +4,27 @@ module SocialParser
   module Provider
     class Google < Base
       URL_FORMATS = {
-        full: /\A((http|https)?:\/\/)?(www\.)?google/
+        full: /((https?)?:\/\/)?plus\.google\.com\/u\/\d{1,}\/(?<id>[\w\-\.\+]+)?/i,
+        shorter: /((https?)?:\/\/)?plus.google.com\/(?<id>[\w\-\.\+]+)?/i
       }
+
+      def provider
+        :google
+      end
+
+      def url
+        "https://plus.google.#{domain}/#{username}"
+      end
+
+      private
+
+      def parse_from_url
+        URL_FORMATS.values.each do |format|
+          m = format.match(url_from_attributes)
+          return m[:id] if m
+        end
+        nil
+      end
     end
   end
 end
-
-
-# https://plus.google.com/u/0/+bakemonogatari777
-# https://plus.google.com/u/0/+InaGat
-# https://plus.google.com/u/0/+%E3%83%9F%E3%83%9F%E3%81%A1%E3%82%83%E3%82%93
-
-
-# module SocialMediaParser
-#   module Provider
-#     class Google < Base
-#       URL_REGEX = /(?:(?:http|https):\/\/)plus.google.com\/?(?:u\/\d{1,}\/|)(?:\+|)([\w\-\.\%]{1,})/i
-
-#       def provider
-#         'google'
-#       end
-
-#       def url
-#         return url_from_attributes if url_from_attributes
-#         if username
-#           if Float(username)
-#             "https://plus.google.com/#{username}"
-#           end
-#         end
-#       rescue ArgumentError
-#         "https://plus.google.com/+#{username}"
-#       end
-
-#       private
-
-#       def parse_username_from_url
-#         URL_REGEX.match(url_from_attributes).to_a[1]
-#       end
-#     end
-#   end
-# end
