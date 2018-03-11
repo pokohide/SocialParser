@@ -4,6 +4,7 @@ module SocialParser
   module Provider
     class Vimeo < Base
       URL_FORMATS = {
+        embed: /\A((https?)?:\/\/)?player\.vimeo\.com\/video\/(?<id>\d+)\/?/i,
         video: /\A((https?)?:\/\/)?(www\.)?vimeo\.com\/(?<id>\d+)\/?/i,
         channels: /\A((https?)?:\/\/)?(www\.)?vimeo\.com\/channels\/(?<id>[\w\-\.]+)\/?/i,
         user: /\A((https?)?:\/\/)?(www\.)?vimeo\.com\/(?<id>[\w\-\.]+)\/?/i
@@ -34,7 +35,7 @@ module SocialParser
 
       private
 
-      def video?; type == 'video' end
+      def video?; (type == 'video' || type == 'embed') end
       def channels?; type =='channels' end
 
       def parse_from_url
