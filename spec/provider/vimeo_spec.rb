@@ -85,6 +85,17 @@ RSpec.describe SocialParser do
     end
   end
 
+  context 'vimeo full video url' do
+    let(:profile_attributes) { { url: 'https://vimeo.com/channels/staffpicks/258921340' } }
+
+    it 'returns the parsed attributes' do
+      expect(parser.url).to eq 'https://vimeo.com/258921340'
+      expect(parser.provider).to eq :vimeo
+      expect(parser.id).to eq '258921340'
+      expect(parser.embed_url).to eq 'https://player.vimeo.com/video/258921340'
+    end
+  end
+
   context 'convert video url into embed url' do
     let(:profile_attributes) { { url: 'https://vimeo.com/155855866' } }
 
