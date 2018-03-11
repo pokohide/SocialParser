@@ -4,6 +4,7 @@ module SocialParser
   module Provider
     class Youtube < Base
       URL_FORMATS = {
+        embed: /\A((https?)?:\/\/)?(www\.)?youtube\.com\/embed\/(?<id>[\w\-\.]+)\/?/i,
         video: /\A((https?)?:\/\/)?(www\.)?youtube\.com\/watch\?v=(?<id>[\w\-\.]+)\/?/i,
         full: /\A((https?)?:\/\/)?(www\.)?youtube\.com\/(?<type>(user|channel|playlist))\/(?<id>[\w\-\.]+)\/?/i,
         shortend: /\A((https?)?:\/\/)?(www\.)?youtube\.com\/(?<id>[\w\-\.]+)\/?/i,
@@ -44,7 +45,7 @@ module SocialParser
           if key == :full
             @type = m[:type]
             return nil if @type != 'user'
-          elsif key == :video
+          elsif key == :video || key == :embed
             @type = 'video'
           end
           return m[:id]
