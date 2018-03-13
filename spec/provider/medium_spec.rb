@@ -42,6 +42,11 @@ RSpec.describe SocialParser do
   end
 
   context 'url variations' do
+    it 'parser username from url withour @' do
+      parser = described_class.parse 'https://medium.com/academytoken'
+      expect(parser.username).to eq 'academytoken'
+    end
+
     it 'parses username from url with trailing slash' do
       parser = described_class.parse 'https://medium.com/@pokohide/'
       expect(parser.username).to eq '@pokohide'

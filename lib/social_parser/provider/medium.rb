@@ -4,7 +4,7 @@ module SocialParser
   module Provider
     class Medium < Base
       URL_FORMATS = {
-        full: /\A((https?)?:\/\/)?(www\.)?medium\.com\/(?<id>@[\w\-\.]+)\/?/i
+        full: /\A((https?)?:\/\/)?(www\.)?medium\.com\/(?<id>@?[\w\-\.]+)\/?/i
       }
 
       def provider

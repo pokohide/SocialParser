@@ -96,11 +96,6 @@ RSpec.describe SocialParser do
       expect(parser.username).to eq '11361'
     end
 
-    it 'parser username from url with kanji' do
-      parser = described_class.parse 'https://www.linkedin.com/in/大輝-山本-2581b589/'
-      expect(parser.username).to eq '大輝-山本-2581b589'
-    end
-
     it 'parses username from url with some parameters' do
       parser = described_class.parse 'https://www.linkedin.com/company/linkedin?hoge=www&fugaa=yyy'
       expect(parser.url).to eq 'https://www.linkedin.com/company/linkedin'

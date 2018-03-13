@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    social_parser (1.0.3)
+    social_parser (1.0.4)
       public_suffix
 
 GEM
