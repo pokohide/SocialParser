@@ -47,6 +47,11 @@ RSpec.describe SocialParser do
       expect(parser.username).to eq 'hyde141421356'
     end
 
+    it 'parses username from url with @' do
+      parser = described_class.parse 'https://twitter.com/@appp_la'
+      expect(parser.id).to eq 'appp_la'
+    end
+
     it 'parses username from url with www' do
       parser = described_class.parse 'https://www.twitter.com/hyde141421356/'
       expect(parser.username).to eq 'hyde141421356'

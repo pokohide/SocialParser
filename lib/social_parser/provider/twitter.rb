@@ -4,7 +4,7 @@ module SocialParser
   module Provider
     class Twitter < Base
       URL_FORMATS = {
-        full: /\A((https?):\/\/)?(www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?<id>\w+)/i
+        full: /\A((https?):\/\/)?(www\.)?twitter\.com\/@?(?<id>[\w\-\.]+)/i
         # regular: /\Ahttps?:\/\/(www\.)?twitter\.com\/(?!share)(?!share\?)(?!intent\/)(?<id>.+?)\/?\Z/
       }
 
