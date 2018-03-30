@@ -19,6 +19,10 @@ module SocialParser
       nil
     end
 
+    def id
+      nil
+    end
+
     def url
       url_from_attributes
     end

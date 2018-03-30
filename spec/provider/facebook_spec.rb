@@ -82,5 +82,10 @@ RSpec.describe SocialParser do
       parser = described_class.parse 'https://www.facebook.com/pokohide/videos?lst=xxxx&ref=yyy'
       expect(parser.username).to eq 'pokohide'
     end
+
+    it 'does not parse username from url' do
+      parser = described_class.parse 'https://graph.facebook.com/oauth/authorize?client_id=568578813238778'
+      expect(parser.id).to eq nil
+    end
   end
 end
