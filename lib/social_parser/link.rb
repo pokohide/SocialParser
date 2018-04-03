@@ -23,6 +23,10 @@ module SocialParser
       nil
     end
 
+    def embed_url
+      nil
+    end
+
     def url
       url_from_attributes
     end
