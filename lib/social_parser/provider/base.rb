@@ -38,7 +38,7 @@ module SocialParser
       end
 
       def embed_url
-        raise SocialParser::InvalidURIError
+        nil
       end
 
       def valid?

@@ -104,11 +104,11 @@ RSpec.describe SocialParser do
     end
   end
 
-  context 'convert user url into embed url cause an error' do
+  context 'convert user url into embed url return nil' do
     let(:profile_attributes) { { url: 'https://vimeo.com/alextiernan' } }
 
     it 'cause an errors' do
-      expect { parser.embed_url }.to raise_error(SocialParser::InvalidURIError)
+      expect(parser.embed_url).to eq nil
     end
   end
 
